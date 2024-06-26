@@ -1,2 +1,1 @@
-# MultilingualImageCaptioningwithVoiceAssistance
-Multilingual Image Captioning with Voice Assistance
+# Heroku-Demo

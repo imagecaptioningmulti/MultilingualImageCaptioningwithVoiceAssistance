@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Simple Flask App</title>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Enter Your Name</h2>
+      <form action="{{ url_for('predict') }}" method="post">
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      <br>
+      {% if prediction_text %}
+        <h3>{{ prediction_text }}</h3>
+      {% endif %}
+    </div>
+  </body>
+</html>

@@ -3,22 +3,42 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Simple Flask App</title>
+    <title>Image Captioning Flask App</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      .image-preview {
+        max-width: 100%;
+        height: auto;
+        margin-top: 20px;
+      }
+    </style>
   </head>
   <body>
     <div class="container">
-      <h2>Enter Your Name</h2>
-      <form action="{{ url_for('predict') }}" method="post">
+      <h2>Upload an Image for Captioning</h2>
+      <form action="{{ url_for('predictweb') }}" method="post" enctype="multipart/form-data">
         <div class="form-group">
-          <label for="name">Name:</label>
-          <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name">
+          <label for="image">Image:</label>
+          <input type="file" class="form-control-file" id="image" name="image" accept="image/*" onchange="previewImage(event)">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
       <br>
+      <img id="image-preview" class="image-preview" src="{{ url_for('static', filename=image_url) }}"  alt="Image preview">
       {% if prediction_text %}
-        <h3>{{ prediction_text }}</h3>
+        <h3>Predicted Caption: {{ prediction_text }}</h3>
       {% endif %}
     </div>
+
+    <script>
+      function previewImage(event) {
+        const reader = new FileReader();
+        reader.onload = function() {
+          const output = document.getElementById('image-preview');
+          output.src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+      }
+    </script>
   </body>
 </html>

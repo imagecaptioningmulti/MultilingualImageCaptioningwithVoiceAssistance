@@ -12,10 +12,9 @@ from nlp_utils import clean_sentence
 app = Flask(__name__)
 # Configuration
 
-# downloads_folder = os.path.expanduser('~/Downloads')
-# cocoapi_dir = os.path.join(downloads_folder, 'COCOdataset')
+
 cocoapi_dir = os.path.dirname(os.path.realpath(__file__))
-print('>>>>>>>>>>>>',cocoapi_dir)
+
 
 CORS(app)
 # Defining a transform to pre-process the testing images.
@@ -45,7 +44,7 @@ hidden_size = 512
 
 # The size of the vocabulary.
 vocab_size = len(data_loader.dataset.vocab)
-print(vocab_size)
+
 # Initialize the encoder and decoder, and set each to inference mode.
 encoder = EncoderCNN(embed_size)
 decoder = DecoderRNN(embed_size, hidden_size, vocab_size)
@@ -92,14 +91,14 @@ def predictweb():
         return jsonify({"error": "No image uploaded"}), 400
     
     file = request.files['image']
-    print(file.filename)
+  
     # filename = os.path.join('./uploads', file.filename)
     # file.save(filename)
     if file and file.filename != '':
         img = Image.open(io.BytesIO(file.read())).convert("RGB")
         caption = predict_caption(img)
         image_url = url_for('static', filename='uploads/' + file.filename)
-        print(image_url)
+        
 
     # Save the uploaded image to a static/uploads directory for display
         file.save(os.path.join('static/uploads', file.filename))

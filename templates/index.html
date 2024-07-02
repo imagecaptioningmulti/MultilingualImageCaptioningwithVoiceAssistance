@@ -1,44 +1,16 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Image Captioning Flask App</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-      .image-preview {
-        max-width: 100%;
-        height: auto;
-        margin-top: 20px;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <h2>Upload an Image for Captioning</h2>
-      <form action="{{ url_for('predictweb') }}" method="post" enctype="multipart/form-data">
-        <div class="form-group">
-          <label for="image">Image:</label>
-          <input type="file" class="form-control-file" id="image" name="image" accept="image/*" onchange="previewImage(event)">
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-      <br>
-      <img id="image-preview" class="image-preview" src="{{ url_for('static', filename=image_url) }}"  alt="Image preview">
-      {% if prediction_text %}
-        <h3>Predicted Caption: {{ prediction_text }}</h3>
-      {% endif %}
-    </div>
-
-    <script>
-      function previewImage(event) {
-        const reader = new FileReader();
-        reader.onload = function() {
-          const output = document.getElementById('image-preview');
-          output.src = reader.result;
-        };
-        reader.readAsDataURL(event.target.files[0]);
-      }
-    </script>
-  </body>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Health Check</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <h2>Health Check</h2>
+    <p>Hello, this is a health check for the Image Captioning Flask App.</p>
+    <p>If you can see this message, the server is up and running.</p>
+  </div>
+</body>
 </html>
